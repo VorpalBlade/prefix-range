@@ -29,6 +29,9 @@ See the [crate documentation][docs.rs] for usage examples.
 
 ## MSRV
 
+The code is simple, and will likely compile on quite old versions, though
+nothing older than 1.65 is being actively tested.
+
 [crates.io]: https://crates.io/crates/prefix_range
 [docs.rs]: https://docs.rs/prefix_range
 [lib.rs]: https://lib.rs/crates/prefix_range
