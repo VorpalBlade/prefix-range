@@ -1,0 +1,11 @@
+[package]
+authors = ["Jimmy Hartzell"]
+categories = ["algorithms"]
+description = "Compute bounds for prefix string queries for BTreeSet/BTreeMap::range"
+edition = "2021"
+keywords = ["prefix", "tree", "string"]
+license = "MIT"
+name = "prefix-range"
+repository = "https://github.com/VorpalBlade/prefix-range"
+rust-version = "1.65.0"
+version = "0.1.0"
