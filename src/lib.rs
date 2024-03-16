@@ -2,7 +2,7 @@
 //!
 //! While this crate doesn't need std, it does need alloc.
 //!
-//! Taken from https://www.thecodedmessage.com/posts/prefix-ranges/ (by Jimmy Hartzell)
+//! Taken from <https://www.thecodedmessage.com/posts/prefix-ranges/> (by Jimmy Hartzell)
 //! Extended with documentation.
 //!
 //! Licensed under: MIT

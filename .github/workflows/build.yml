@@ -1,4 +1,4 @@
-name: Continuous integration
+name: Build
 
 permissions:
   contents: read
@@ -9,8 +9,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   CARGO_INCREMENTAL: 0
+  CARGO_PROFILE_DEV_DEBUG: 0
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
   RUSTFLAGS: "-D warnings"
@@ -28,7 +33,8 @@ jobs:
           - armv7-unknown-linux-gnueabihf
           - i686-unknown-linux-gnu
           - x86_64-unknown-linux-gnu
-          - x86_64-pc-windows-gnu
+          # Disable until cross is fixed
+          #- x86_64-pc-windows-gnu
         rust:
           - stable
           - beta
@@ -62,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
-        run: rustup install --profile minimal stable && rustup default stable
+        run: rustup install --no-self-update --profile minimal stable && rustup default stable
       - name: Cache builds
         uses: Swatinem/rust-cache@v2.7.3
       - name: Compile
@@ -70,9 +76,9 @@ jobs:
       - name: Test
         run: cargo test --target ${{ matrix.target }} --verbose
 
-  configurations:
+  msrv:
     # Test MSRV
-    name: "Test: Linux, Rust ${{ matrix.rust }}"
+    name: "Test: MSRV (Linux): Rust ${{ matrix.rust }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -90,11 +96,3 @@ jobs:
       - name: Test
         run: cargo test --verbose
 
-  rustfmt:
-    name: Rustfmt
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Install Rust
-      run: rustup install --profile minimal stable && rustup default stable && rustup component add rustfmt
-    - run: cargo fmt -- --check
