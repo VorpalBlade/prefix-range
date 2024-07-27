@@ -44,7 +44,7 @@ pub fn upper_bound_from_prefix(prefix: &str) -> Option<String> {
                 .next()
                 .expect("last_char_str will contain at least one char");
             let Some(last_char_incr) = (last_char..=char::MAX).nth(1) else {
-                // Last character is highest possible code point.
+                // Last character is the highest possible code point.
                 // Go to second-to-last character instead.
                 continue;
             };
