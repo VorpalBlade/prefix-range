@@ -11,7 +11,8 @@
 
 extern crate alloc;
 use alloc::collections::BTreeSet;
-use alloc::{format, string::String};
+use alloc::format;
+use alloc::string::String;
 
 /// Find the key to use as an upper bound for range query
 ///
