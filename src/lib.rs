@@ -71,7 +71,6 @@ pub fn prefixed_set(mut set: BTreeSet<String>, prefix: &str) -> BTreeSet<String>
 
 #[cfg(test)]
 mod tests {
-
     use alloc::string::ToString;
 
     use super::*;
